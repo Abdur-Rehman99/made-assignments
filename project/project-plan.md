@@ -19,7 +19,7 @@ The two datasets aim to tackle environmental challenges from different angles. T
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
 ### Datasource1: City of Neuss: tree plantings 2023
-* Metadata URL: [https://mobilithek.info/offers/-6901989592576801458](https://www.govdata.de/ckan/dataset/stadt-neuss-baumplantungen-2023.rdf)
+* Metadata URL: [https://www.govdata.de/ckan/dataset/stadt-neuss-baumplantungen-2023.rdf](https://www.govdata.de/ckan/dataset/stadt-neuss-baumplantungen-2023.rdf)
 * Data URL: [https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv](https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv)
 * Data Type: CSV
 
