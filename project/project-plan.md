@@ -23,11 +23,12 @@ The two datasets aim to tackle environmental challenges from different angles. T
 * Data URL: [https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv](https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv)
 * Data Type: CSV
 
-Short description of the DataSource.
+Data on tree plantings in 2023. Numerous different tree species were selected for autumn tree planting - including oaks, walnut and cherry trees,
+various types of linden trees and sweetgum trees, which are particularly resistant to heat and drought. Because of these properties, the sweetgum tree is just as considered a “climate tree” as are hackberry trees, whitebeams or locust trees, all of which are also among the selected species
 
 ### Datasource1: Clean Tree Planting Data 2023
 * Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: [https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023](https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023)
+* Data URL: [https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023](https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023)  
 * Data Type: CSV
 
 Short description of the DataSource.
@@ -36,6 +37,6 @@ Short description of the DataSource.
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
 1. Example Issue [#1][i1]
-2. ...
+   
 
 [i1]: https://github.com/jvalue/made-template/issues/1
