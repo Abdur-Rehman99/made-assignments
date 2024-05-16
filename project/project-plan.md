@@ -27,7 +27,7 @@ Data on tree plantings in 2023. Numerous different tree species were selected fo
 various types of linden trees and sweetgum trees, which are particularly resistant to heat and drought. Because of these properties, the sweetgum tree is just as considered a “climate tree” as are hackberry trees, whitebeams or locust trees, all of which are also among the selected species
 
 ### Datasource1: Clean Tree Planting Data 2023
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
+* Metadata URL: [https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023](https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023)  
 * Data URL: [https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023](https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023)  
 * Data Type: CSV
 
