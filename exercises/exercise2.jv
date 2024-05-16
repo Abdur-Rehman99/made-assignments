@@ -1,0 +1,91 @@
+pipeline TreesPipeline{
+
+
+     TreesExtractor -> TreesTextFileInterpreter ;
+     TreesTextFileInterpreter-> TreesCSVInterpreter ;
+     TreesCSVInterpreter
+     -> BaumartDeutschDeleter
+     -> TreesTableInterpreter
+     -> TreesLoader;
+
+valuetype StadtFurth oftype text {
+     // 10. Valuetypes can be further refined by providing constraints.
+     constraints: [
+         FurthSelector
+     ];
+}
+
+valuetype GeoPointValue oftype text {
+         // 10. Valuetypes can be further refined by providing
+constraints.
+         constraints: [
+             GeoPoints
+         ];
+     }
+
+     constraint GeoPoints oftype RegexConstraint {
+         regex: /^r'^\d{1,3}\,\s*\d{1,3}\+$'/;
+     }
+
+
+constraint FurthSelector oftype AllowlistConstraint {
+    allowlist: ["Furth-Süd", "Furth-Mitte", "Furth-Nord"];
+//    condition: "stadtteil LIKE 'Furth-%'";
+  }
+
+
+//     valuetype Coordinate oftype decimal {
+//     constraints: [LatLonRange];
+// }
+
+// constraint LatLonRange oftype RangeConstraint {
+//     lowerBound: -999;
+//     lowerBoundInclusive: true;
+//     upperBound: 999;
+//     upperBoundInclusive: true;
+// }
+
+     block TreesExtractor oftype HttpExtractor{
+         url:
+"https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
+     }
+
+     block TreesTextFileInterpreter oftype TextFileInterpreter { }
+
+     block TreesCSVInterpreter oftype CSVInterpreter{
+
+          delimiter: ';';
+
+     }
+
+     block BaumartDeutschDeleter oftype ColumnDeleter{
+          delete: [column E];
+     }
+
+     // block FurthValidator oftype text {
+     //     condition: "stadtteil LIKE 'Furth-%'";
+     // }
+
+     block TreesTableInterpreter oftype TableInterpreter{
+         header: true;
+         columns: [
+             // "Lfd. Nummer" oftype integer,
+             "lfd_nr" oftype integer,
+             "stadtteil" oftype StadtFurth,
+             "standort" oftype text,
+             "baumart_botanisch" oftype text,
+             "baumart_deutsch" oftype text,
+             "id" oftype GeoPointValue,
+             "baumfamilie" oftype text
+
+// …
+];
+     }
+
+     block TreesLoader oftype SQLiteLoader {
+         table: "trees";
+         file: "./trees.sqlite";
+
+     }
+
+}
