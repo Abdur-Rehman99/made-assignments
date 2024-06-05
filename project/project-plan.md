@@ -31,7 +31,8 @@ various types of linden trees and sweetgum trees, which are particularly resista
 * Data URL: [https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023](https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023)  
 * Data Type: CSV
 
-Short description of the DataSource.
+One of the major challenges of the program in past years has been accurately tracking what types of plants get planted where over the course of each planting season. In this project, I took data from many different sources and compiled them into a usable database format for analysis. Two different ways of cleaning data are reflected in the associated Jupyter Notebook.
+
 ## Work Packages
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
