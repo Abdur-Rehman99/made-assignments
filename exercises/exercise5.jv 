@@ -1,0 +1,62 @@
+pipeline GTFS_Pipeline{
+
+    httpFetcher -> fileSelector -> textParser -> csvProcessor -> columnRemover -> headerAssigner -> databaseSaver;
+
+    block httpFetcher oftype GTFSExtractor{
+        url:"https://gtfs.rhoenenergie-bus.de/GTFS.zip";
+    } 
+
+    block fileSelector oftype FilePicker{
+        path:"/stops.txt";
+    } 
+
+    block textParser oftype TextFileInterpreter{
+        encoding: "utf8";
+    }
+
+    block csvProcessor oftype CSVInterpreter{
+        delimiter:",";
+        enclosing:'"';
+    } 
+
+    block columnRemover oftype ColumnDeleter {
+        delete: [column B, column D, column H, column I, column J, column K, column L];
+    }
+
+    block headerAssigner oftype TableInterpreter{
+        header: false;
+        columns:[
+            "stop_id" oftype integer,
+            "stop_name" oftype text,
+            "stop_latitude" oftype GeoPointValue,
+            "stop_longitude" oftype GeoPointValue,
+            "zone_identifier" oftype ZoneValue
+        ];
+    } 
+
+    block databaseSaver oftype SQLiteLoader{
+        table:"stops";
+        file:"./gtfs.sqlite";
+    } 
+
+    constraint GeoPointRange oftype RangeConstraint {
+        lowerBound: -90;
+        upperBound: 90;
+    }
+
+    valuetype GeoPointValue oftype decimal {
+        constraints: [
+            GeoPointRange
+        ];
+    }
+
+    valuetype ZoneValue oftype integer{
+        constraints:[
+            ZoneConstraint
+        ];
+    }
+
+    constraint ZoneConstraint on integer { 
+        value == 1645;
+    }
+}
