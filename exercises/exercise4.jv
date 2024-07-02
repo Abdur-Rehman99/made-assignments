@@ -1,0 +1,74 @@
+Extractor  -> readCSV -> TextTransformer -> CSVInterpreter;
+
+CSVInterpreter
+-> headerChange
+-> headerChange2
+-> tableHeaders
+-> DateFormatter
+-> DatabaseWriter;
+
+block Extractor oftype GTFSExtractor {
+    url:"https://www.kaggle.com/datasets/chadmottershead/clean-planting-data-2023/download";
+}
+
+block TextTransformer oftype TextFileInterpreter {
+    encoding: "utf8";
+}
+
+block CSVInterpreter oftype CSVInterpreter {
+    delimiter:",";
+}
+
+block readCSV oftype FilePicker {
+    path: "/clean_planting_data_2023.csv";
+}
+
+block headerChange oftype CellWriter {
+    at: range A1:F1;
+    write: ['tree_id', 'species', 'location', 'planting_date', 'height', 'diameter'];
+}
+
+block headerChange2 oftype CellWriter {
+    at: cell G1;
+    write: ['formatted_planting_date'];
+}
+
+block tableHeaders oftype TableInterpreter {
+    header: true;
+    columns: [
+        "tree_id" oftype positiveInt,
+        "species" oftype text,
+        "location" oftype text,
+        "planting_date" oftype text,
+        "height" oftype decimal,
+        "diameter" oftype decimal,
+        "formatted_planting_date" oftype date
+    ];
+}
+
+block DateFormatter oftype TableTransformer {
+    inputColumns: ['planting_date'];
+    outputColumn: 'formatted_planting_date';
+    use: DateFormatterFunction;
+}
+
+transform DateFormatterFunction {
+    from dateStr oftype text;
+    to date oftype date;
+
+    date: parseDate(dateStr, "yyyy-MM-dd");
+}
+
+block DatabaseWriter oftype SQLiteLoader {
+    table: "tree_planting_data";
+    file: "./tree_planting_data.sqlite";
+}
+
+constraint c_postivenum on integer:
+    value >= 0;
+
+valuetype positiveInt oftype integer {
+    constraints: [
+        c_postivenum
+    ];
+}
